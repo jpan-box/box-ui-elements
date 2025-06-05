@@ -2,9 +2,15 @@
 // @ts-nocheck
 
 import path from 'path';
+import webpack from 'webpack';
 
 const language = process.env.LANGUAGE;
+const packageJSON = require('../package.json');
+// process.env.NODE_ENV will be set to production in yarn build:prod:storybook
+// This way, we'll send the correct version in the prod deployed storybook but send dev for local builds
+const version = process.env.NODE_ENV === 'production' ? packageJSON.version : 'dev';
 
+const { DefinePlugin } = webpack;
 const TranslationsPlugin = require('@box/frontend/webpack/TranslationsPlugin');
 const { translationDependencies } = require('../i18n.config');
 
@@ -77,6 +83,9 @@ const config: {
             new TranslationsPlugin({
                 generateBundles: true,
                 additionalMessageData: translationDependencies.map(pkg => `${pkg}/i18n/[language]`),
+            }),
+            new DefinePlugin({
+                __VERSION__: JSON.stringify(version),
             }),
         );
 

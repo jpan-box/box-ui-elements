@@ -51,7 +51,7 @@
         "build:prod:es": "BABEL_ENV=npm NODE_ENV=production yarn build:es --source-maps --ignore \"**/*.d.ts,**/__tests__/**,**/__mocks__/**\"",
         "build:prod:dist": "NODE_ENV=production webpack --config scripts/webpack.config.js --mode production",
         "build:prod:npm": "BABEL_ENV=production OUTPUT=dist LANGUAGE=en-US REACT=true yarn build:prod:dist",
-        "build:prod:storybook": "LANGUAGE=en-US REACT=true BROWSERSLIST_ENV=production BABEL_ENV=development NODE_ENV=development storybook build -c .storybook -o storybook",
+        "build:prod:storybook": "LANGUAGE=en-US REACT=true BROWSERSLIST_ENV=production BABEL_ENV=production NODE_ENV=production storybook build -c .storybook -o storybook",
         "build:sync": "LANGUAGE=en-US BABEL_ENV=development NODE_ENV=development RSYNC=true webpack --config scripts/webpack.config.js --mode development",
         "chromatic": "chromatic",
         "clean": "rm -rf dist es i18n/json i18n/*.js reports storybook",
@@ -89,11 +89,7 @@
             "last 2 Edge versions",
             "last 2 iOS versions"
         ],
-        "development": [
-            "last 1 Chrome versions",
-            "last 1 Firefox versions",
-            "last 1 Safari versions"
-        ]
+        "development": ["last 1 Chrome versions", "last 1 Firefox versions", "last 1 Safari versions"]
     },
     "husky": {
         "hooks": {
@@ -359,8 +355,6 @@
         }
     },
     "msw": {
-        "workerDirectory": [
-            ".storybook/public"
-        ]
+        "workerDirectory": [".storybook/public"]
     }
 }

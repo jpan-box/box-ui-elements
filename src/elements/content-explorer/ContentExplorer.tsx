@@ -237,6 +237,8 @@ class ContentExplorer extends Component<ContentExplorerProps, State> {
     constructor(props: ContentExplorerProps) {
         super(props);
 
+        const version = __VERSION__ || null;
+
         const {
             apiHost,
             initialPage,
@@ -264,6 +266,7 @@ class ContentExplorer extends Component<ContentExplorerProps, State> {
             sharedLinkPassword,
             token,
             uploadHost,
+            version,
         });
 
         this.id = uniqueid('bce_');
